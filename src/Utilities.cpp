@@ -61,23 +61,23 @@ void celero::DisableDynamicCPUScaling()
 
 		// https://msdn.microsoft.com/en-us/library/aa373215(v=vs.85).aspx
 		SYSTEM_POWER_CAPABILITIES spc;
-		
+
 		CallNtPowerInformation(
-			SystemPowerCapabilities, 
+			SystemPowerCapabilities,
 			NULL,
 			NULL,
 			&spc,
 			sizeof(SYSTEM_POWER_CAPABILITIES));
-		
+
 		if(spc.ProcessorThrottle == TRUE)
 		{
 			celero::print::Console("CPU supports processor throttling.  Attempting to disable.");
-			
+
 			if(spc.ProcessorMinThrottle != 100)
 			{
 				spc.ProcessorMaxThrottle = 100;
 				spc.ProcessorMinThrottle = 100;
-		
+
 				CallNtPowerInformation(
 					SystemPowerCapabilities,
 					&spc,
@@ -85,7 +85,7 @@ void celero::DisableDynamicCPUScaling()
 					NULL,
 					NULL);
 			}
-		
+
 			celero::DisableDynamicCPUScaling();
 		}
 		else
