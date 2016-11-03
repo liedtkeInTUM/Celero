@@ -24,6 +24,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 # Project Name
+cmake_policy(SET CMP0048 NEW) # project() command manages VERSION variables
 PROJECT(CeleroProject)
 
 include(CheckFunctionExists)
