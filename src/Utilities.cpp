@@ -47,6 +47,7 @@ void celero::DoNotOptimizeAway(std::function<void(void)>&& x)
 void celero::DisableDynamicCPUScaling()
 {
 	#ifdef WIN32
+	#ifndef WINAPI_FAMILY
 		// http://stackoverflow.com/questions/3975551/how-to-disable-dynamic-frequency-scaling
 		// https://msdn.microsoft.com/en-us/library/aa372675(v=vs.85).aspx
 		//
@@ -92,7 +93,10 @@ void celero::DisableDynamicCPUScaling()
 			celero::print::Console("CPU processor throttling disabled.");
 		}
 	#else
-		// The Linux kernel has full SpeedStep support 
+		celero::print::Console( "TODO: UWP don't know how to handle this." );
+	#endif // !WINAPI_FAMILY
+	#else
+		// The Linux kernel has full SpeedStep support
 		// integrated since version 2.6.
 	#endif
 }
